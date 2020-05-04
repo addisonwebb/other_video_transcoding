@@ -18,7 +18,7 @@ module Transcoding
   class Command
     def about
       <<HERE
-other-transcode 0.3.0
+other-transcode 0.3.1
 Copyright (c) 2019-2020 Don Melton
 HERE
     end
@@ -534,6 +534,12 @@ HERE
           fail UsageError, "invalid crop geometry: #{arg}"
         end
 
+        @encoder = nil if @encoder == 'copy'
+      end
+
+      opts.on '--480p' do
+        @max_width  = 854
+        @max_height = 480
         @encoder = nil if @encoder == 'copy'
       end
 
